@@ -2,6 +2,8 @@ bin/
 lib/
 bin
 lib
+out
+out/
 .idea
 .settings
 *.class
