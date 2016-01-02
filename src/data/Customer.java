@@ -15,4 +15,16 @@ public class Customer extends User{
 		PassportNumber = rs.getString("PassportNumber");
 		Discount = rs.getInt("Discount");
 	}
+	public String getPassportNumber() {
+		return PassportNumber;
+	}
+	public void setPassportNumber(String passportNumber) {
+		PassportNumber = passportNumber;
+	}
+	public int getDiscount() {
+		return Discount;
+	}
+	public void setDiscount(int discount) {
+		Discount = discount;
+	}
 }

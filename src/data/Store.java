@@ -14,4 +14,28 @@ public class Store {
 		Address = rs.getString("Address");
 		Name = rs.getString("Name");
 	}
+
+	public int getStoreId() {
+		return StoreId;
+	}
+
+	public void setStoreId(int storeId) {
+		StoreId = storeId;
+	}
+
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String address) {
+		Address = address;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
 }

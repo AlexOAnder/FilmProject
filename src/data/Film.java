@@ -23,4 +23,52 @@ public class Film {
 		Year = rs.getInt("Year");
 		RentCost = rs.getDouble("RentCost");
 	}
+
+	public int getFilmId() {
+		return FilmId;
+	}
+
+	public void setFilmId(int filmId) {
+		FilmId = filmId;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public FilmType getType() {
+		return Type;
+	}
+
+	public void setType(FilmType type) {
+		Type = type;
+	}
+
+	public double getRating() {
+		return Rating;
+	}
+
+	public void setRating(double rating) {
+		Rating = rating;
+	}
+
+	public int getYear() {
+		return Year;
+	}
+
+	public void setYear(int year) {
+		Year = year;
+	}
+
+	public double getRentCost() {
+		return RentCost;
+	}
+
+	public void setRentCost(double rentCost) {
+		RentCost = rentCost;
+	}
 }

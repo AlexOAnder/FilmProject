@@ -10,6 +10,8 @@ public class DataBaseConnection{
 	//constructor
 	DataBaseConnection(){
 		try{
+			Class.forName("com.mysql.jdbc.Driver");
+            System.out.println("Driver loading success!");
 			String url = "jdbc:mysql://localhost/";
 			myConn = DriverManager.getConnection(url,"alexoander","12345D");
 			// create a statement
