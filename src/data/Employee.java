@@ -4,42 +4,45 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+/**Created by AlexOAnder 
+ * 02.01.2016**/
+
 public class Employee extends User {
 
-	public String CashierPassword;
-	public Date Hired;
-	public Date ContractExpires;
+	private String _cashierPassword;
+	private Date _hired;
+	private Date _contractExpires;
 
 	public Employee(ResultSet rs) throws SQLException {
 		Id = rs.getInt("EmployeeId");
 		FirstName = rs.getString("FirstName");
 		LastName = rs.getString("LastName");
-		CashierPassword = rs.getString("CashierPassword");
-		Hired = rs.getDate("Hired");
-		ContractExpires = rs.getDate("ContractExpires");
+		_cashierPassword = rs.getString("CashierPassword");
+		_hired = rs.getDate("Hired");
+		_contractExpires = rs.getDate("ContractExpires");
 	}
 
 	public String getCashierPassword() {
-		return CashierPassword;
+		return _cashierPassword;
 	}
 
 	public void setCashierPassword(String cashierPassword) {
-		CashierPassword = cashierPassword;
+		_cashierPassword = cashierPassword;
 	}
 
 	public Date getHired() {
-		return Hired;
+		return _hired;
 	}
 
 	public void setHired(Date hired) {
-		Hired = hired;
+		_hired = hired;
 	}
 
 	public Date getContractExpires() {
-		return ContractExpires;
+		return _contractExpires;
 	}
 
 	public void setContractExpires(Date contractExpires) {
-		ContractExpires = contractExpires;
+		_contractExpires = contractExpires;
 	}
 }

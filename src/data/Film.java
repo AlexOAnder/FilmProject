@@ -2,73 +2,95 @@ package data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+
+/**Created by AlexOAnder 
+ * 02.01.2016**/
 
 public class Film {
 
-	public int FilmId;
-	public String Name;
-	public FilmType Type;
-	public double Rating;
-	public int Year;
-	public double RentCost;
+	private int _filmId;
+	private String _name;
+	private FilmType _type;
+	private double _rating;
+	private int _year;
+	private double _rentCost;
+	private int _availableCount;
 	
 	public Film(ResultSet rs) throws SQLException	{
-		FilmId = rs.getInt("FilmId");
-		Name = rs.getString("Name");
 		
-		int tmp  = rs.getInt("Type");
-		Type = FilmType.fromInt(tmp);
+		setFilmId(rs.getInt("FilmId"));
+		setName(rs.getString("Name"));
+		setType(rs.getInt("Type"));
+
+		setRating(rs.getDouble("Rating"));
+		setYear(rs.getInt("Year"));
 		
-		Rating = rs.getDouble("Rating");
-		Year = rs.getInt("Year");
-		RentCost = rs.getDouble("RentCost");
+		setRentCost(rs.getDouble("RentCost"));
+		setAvailableCount(rs.getInt"AvailableCount"));
 	}
 
 	public int getFilmId() {
-		return FilmId;
+		return _filmId;
 	}
 
 	public void setFilmId(int filmId) {
-		FilmId = filmId;
+		// need to investigate - i think that setter is redundant
+		_filmId = filmId;
 	}
 
 	public String getName() {
-		return Name;
+		return _name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		if (name != "" && name != null)
+			_name = name;
 	}
 
 	public FilmType getType() {
-		return Type;
+		return _type;
 	}
 
-	public void setType(FilmType type) {
-		Type = type;
+	public void setType(int type) {
+		if (type >= 0)
+			_type = FilmType.fromInt(type);
 	}
 
 	public double getRating() {
-		return Rating;
+		return _rating;
 	}
 
 	public void setRating(double rating) {
-		Rating = rating;
+		if (rating < 5.0d && rating>0.0d)
+			_rating = rating;
 	}
 
 	public int getYear() {
-		return Year;
+		return _year;
 	}
 
 	public void setYear(int year) {
-		Year = year;
+		 // yes, i know. That not right, but i sure that limit will work for sure)
+		if (year>1890 && year<2100)  
+			_year = year;
 	}
 
 	public double getRentCost() {
-		return RentCost;
+		return _rentCost;
 	}
 
 	public void setRentCost(double rentCost) {
-		RentCost = rentCost;
+		if (rentCost>0.0d)
+			_rentCost = rentCost;
+	}
+
+	public int getAvailableCount() {
+		return _availableCount;
+	}
+
+	public void setAvailableCount(int availableCount) {
+		if (availableCount>0)
+			this._availableCount = availableCount;
 	}
 }

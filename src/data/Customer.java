@@ -5,26 +5,26 @@ import java.sql.SQLException;
 
 public class Customer extends User{
 
-	public String PassportNumber;
-	public int Discount;
+	private String _passportNumber;
+	private int _discount;
 	// constructor for the mapping
 	public Customer(ResultSet rs) throws SQLException	{
 		Id = rs.getInt("CustomerId");
 		FirstName = rs.getString("FirstName");
 		LastName = rs.getString("LastName");
-		PassportNumber = rs.getString("PassportNumber");
-		Discount = rs.getInt("Discount");
+		_passportNumber = rs.getString("PassportNumber");
+		_discount = rs.getInt("Discount");
 	}
 	public String getPassportNumber() {
-		return PassportNumber;
+		return _passportNumber;
 	}
 	public void setPassportNumber(String passportNumber) {
-		PassportNumber = passportNumber;
+		_passportNumber = passportNumber;
 	}
 	public int getDiscount() {
-		return Discount;
+		return _discount;
 	}
 	public void setDiscount(int discount) {
-		Discount = discount;
+		_discount = discount;
 	}
 }

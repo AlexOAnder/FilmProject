@@ -1,5 +1,8 @@
 package data;
 
+/**Created by AlexOAnder 
+ * 02.01.2016**/
+
 public enum FilmType {
 	None (0),
 	Comedy (1),

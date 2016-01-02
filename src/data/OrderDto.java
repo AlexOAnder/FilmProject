@@ -2,55 +2,54 @@ package data;
 
 import java.util.Date;
 // need for representation of the Order's object
+
+/**Created by AlexOAnder 
+ * 02.01.2016**/
+
 public class OrderDto {
 
-	public int Id;
-	public Store Store;
-	public Customer Customer;
-	public Employee Employee;
-	public Date Created;
-	public Date RentFrom;
-	public Date RentExpires;
-	public final int getId() {
-		return Id;
+	private int _orderId;
+	private Customer _customer;
+	private Employee _employee;
+	private Date _created;
+	private Date _rentFrom;
+	private Date _rentExpires;
+	
+	public int getOrderId() {
+		return _orderId;
 	}
-	public final void setId(int id) {
-		Id = id;
+	public void setOrderId(int orderId) {
+		this._orderId = orderId;
 	}
-	public final Store getStore() {
-		return Store;
+	public Customer getCustomer() {
+		return _customer;
 	}
-	public final void setStore(Store store) {
-		Store = store;
+	public void setCustomer(Customer customer) {
+		this._customer = customer;
 	}
-	public final Customer getCustomer() {
-		return Customer;
+	public Employee getEmployee() {
+		return _employee;
 	}
-	public final void setCustomer(Customer customer) {
-		Customer = customer;
+	public void setEmployee(Employee employee) {
+		this._employee = employee;
 	}
-	public final Employee getEmployee() {
-		return Employee;
+	public Date getCreated() {
+		return _created;
 	}
-	public final void setEmployee(Employee employee) {
-		Employee = employee;
+	public void setCreated(Date created) {
+		this._created = created;
 	}
-	public final Date getCreated() {
-		return Created;
+	public Date getRentFrom() {
+		return _rentFrom;
 	}
-	public final void setCreated(Date created) {
-		Created = created;
+	public void setRentFrom(Date rentFrom) {
+		this._rentFrom = rentFrom;
 	}
-	public final Date getRentFrom() {
-		return RentFrom;
+	public Date getRentExpires() {
+		return _rentExpires;
 	}
-	public final void setRentFrom(Date rentFrom) {
-		RentFrom = rentFrom;
+	public void setRentExpires(Date rentExpires) {
+		this._rentExpires = rentExpires;
 	}
-	public final Date getRentExpires() {
-		return RentExpires;
-	}
-	public final void setRentExpires(Date rentExpires) {
-		RentExpires = rentExpires;
-	}
+	
 }

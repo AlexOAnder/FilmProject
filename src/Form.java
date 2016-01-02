@@ -1,10 +1,19 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JTable;
 
 public class Form {
 
 	private JFrame frame;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -34,8 +43,15 @@ public class Form {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 669, 463);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(144, 11, 499, 377);
+		frame.getContentPane().add(panel);
+		
+		table = new JTable();
+		panel.add(table);
 	}
-
 }
