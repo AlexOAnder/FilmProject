@@ -12,7 +12,7 @@ public class DataBaseProvider{
 	
 	public static Connection conn = null;
 	
-	private static DataBaseProvider _instance = new DataBaseProvider();
+	private static DataBaseProvider _instance = null;
 	
 	private String uri = null;
 	private String login = null;
@@ -54,9 +54,11 @@ public class DataBaseProvider{
 		}
 	}
 	
-	public static DataBaseProvider GetInstance()
-    {
-        return _instance;
+	public static synchronized DataBaseProvider GetInstance()
+    {			
+		if (_instance == null)
+			_instance = new DataBaseProvider();
+		return _instance;		
     }
 	
 	private void LoadDbConfig()	{
@@ -72,7 +74,7 @@ public class DataBaseProvider{
             login = property.getProperty("db.login");
             pass = property.getProperty("db.password");
  
-            System.out.println("CHECK->HOST: " + uri
+            System.out.println("CHECK->URI: " + uri
                             + ", LOGIN: " + login
                             + ", PASSWORD: " + pass);
  
@@ -82,7 +84,7 @@ public class DataBaseProvider{
 	}
 	
 	@Override
-    protected void finalize() throws Throwable
+    protected void finalize() throws Throwable 
     {
         //close connection when exit application
 		conn.close();

@@ -1,4 +1,4 @@
-package data;
+package Entities;
 
 import java.util.Date;
 // need for representation of the Order's object
