@@ -2,7 +2,7 @@ package data;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+
 
 /**Created by AlexOAnder 
  * 02.01.2016**/
@@ -27,7 +27,7 @@ public class Film {
 		setYear(rs.getInt("Year"));
 		
 		setRentCost(rs.getDouble("RentCost"));
-		setAvailableCount(rs.getInt"AvailableCount"));
+		setAvailableCount(rs.getInt("AvailableCount"));
 	}
 
 	public int getFilmId() {

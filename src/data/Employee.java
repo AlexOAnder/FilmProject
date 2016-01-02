@@ -9,19 +9,28 @@ import java.util.Date;
 
 public class Employee extends User {
 
+	private int _employeeId;
 	private String _cashierPassword;
 	private Date _hired;
 	private Date _contractExpires;
 
 	public Employee(ResultSet rs) throws SQLException {
-		Id = rs.getInt("EmployeeId");
-		FirstName = rs.getString("FirstName");
-		LastName = rs.getString("LastName");
-		_cashierPassword = rs.getString("CashierPassword");
-		_hired = rs.getDate("Hired");
-		_contractExpires = rs.getDate("ContractExpires");
+		setEmployeeId(rs.getInt("CustomerId"));
+		setFirstName(rs.getString("FirstName"));
+		setLastName(rs.getString("LastName"));
+		setCashierPassword(rs.getString("CashierPassword"));
+		setHired(rs.getDate("Hired"));
+		setContractExpires(rs.getDate("ContractExpires"));
 	}
 
+	private void setEmployeeId(int employeeId) {
+		_employeeId = employeeId;
+	}
+
+	public int getEmployeeId()	{
+		return _employeeId;
+	}
+	
 	public String getCashierPassword() {
 		return _cashierPassword;
 	}
@@ -43,6 +52,8 @@ public class Employee extends User {
 	}
 
 	public void setContractExpires(Date contractExpires) {
-		_contractExpires = contractExpires;
+		if (_hired != null)
+			if (contractExpires.after(_hired))
+				_contractExpires = contractExpires;
 	}
 }

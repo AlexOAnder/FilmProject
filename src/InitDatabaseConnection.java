@@ -4,15 +4,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import DBPackage.DataBaseProvider;
+
 public class InitDatabaseConnection {
 
 	public InitDatabaseConnection() throws SQLException{
 		
-		DataBaseConnection dbConn = new DataBaseConnection();
-		if (dbConn.myConn != null)
+		if (DataBaseProvider.conn != null)
 		{
 			try {
-				Statement statement = dbConn.myConn.createStatement();
+				//Statement statement = DataBaseProvider.conn.createStatement();
 			
 				//ResultSet res = statement.executeQuery("SELECT * FROM fmdat.films");
 				// for insert update
@@ -21,20 +22,20 @@ public class InitDatabaseConnection {
 				{
 					System.out.println(res.getString("id")+" "+res.getString("Name"));
 				}*/
-				PreparedStatement prepStatement = dbConn.myConn.prepareStatement("Select * FROM fmdat.customer");
+				PreparedStatement prepStatement = DataBaseProvider.conn.prepareStatement("Select * FROM fmdat.customer");
 				ResultSet res = prepStatement.executeQuery();
 	
 				while (res.next())
 				{
 					Customer customer = new Customer(res);
-					System.out.println(customer.Id+" "
-								+customer.FirstName+" "
-								+customer.LastName+" "
-								+customer.PassportNumber+" "
-								+customer.Discount);
+					System.out.println(customer.getCustomerId()+" "
+								+customer.getFirstName()+" "
+								+customer.getLastName()+" "
+								+customer.getPassportNumber()+" "
+								+customer.getDiscount());
 				}
 			} catch (SQLException e) {
-				dbConn.myConn.rollback();
+				DataBaseProvider.conn.rollback();
 				e.printStackTrace();
 			}
 		}

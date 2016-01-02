@@ -5,26 +5,19 @@ package data;
 
 public class User {
 
-	public int Id;
-	public String FirstName;
-	public String LastName;
+	private String _firstName;
+	private String _lastName;
 	
-	private final int getId() {
-		return Id;
+	public final String getFirstName() {
+		return _firstName;
 	}
-	private final void setId(int id) {
-		Id = id;
+	public final void setFirstName(String firstName) {
+		_firstName = firstName;
 	}
-	private final String getFirstName() {
-		return FirstName;
+	public final String getLastName() {
+		return _lastName;
 	}
-	private final void setFirstName(String firstName) {
-		FirstName = firstName;
-	}
-	private final String getLastName() {
-		return LastName;
-	}
-	private final void setLastName(String lastName) {
-		LastName = lastName;
+	public final void setLastName(String lastName) {
+		_lastName = lastName;
 	}
 } 

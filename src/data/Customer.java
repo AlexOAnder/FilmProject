@@ -3,17 +3,21 @@ package data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**Created by AlexOAnder 
+ * 02.01.2016**/
+
 public class Customer extends User{
 
+	private int _customerId;
 	private String _passportNumber;
 	private int _discount;
 	// constructor for the mapping
 	public Customer(ResultSet rs) throws SQLException	{
-		Id = rs.getInt("CustomerId");
-		FirstName = rs.getString("FirstName");
-		LastName = rs.getString("LastName");
-		_passportNumber = rs.getString("PassportNumber");
-		_discount = rs.getInt("Discount");
+		setCustomerId(rs.getInt("CustomerId"));
+		setFirstName(rs.getString("FirstName"));
+		setLastName(rs.getString("LastName"));
+		setPassportNumber(rs.getString("PassportNumber"));
+		setDiscount(rs.getInt("Discount"));
 	}
 	public String getPassportNumber() {
 		return _passportNumber;
@@ -26,5 +30,11 @@ public class Customer extends User{
 	}
 	public void setDiscount(int discount) {
 		_discount = discount;
+	}
+	public int getCustomerId() {
+		return _customerId;
+	}
+	public void setCustomerId(int customerId) {
+		this._customerId = customerId;
 	}
 }
