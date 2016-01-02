@@ -16,6 +16,7 @@ public class Film {
 	private int _year;
 	private double _rentCost;
 	private int _availableCount;
+	private boolean _available;
 	
 	public Film(ResultSet rs) throws SQLException	{
 		
@@ -28,6 +29,7 @@ public class Film {
 		
 		setRentCost(rs.getDouble("RentCost"));
 		setAvailableCount(rs.getInt("AvailableCount"));
+		setAvailable(rs.getBoolean("Available"));
 	}
 
 	public int getFilmId() {
@@ -92,5 +94,13 @@ public class Film {
 	public void setAvailableCount(int availableCount) {
 		if (availableCount>0)
 			this._availableCount = availableCount;
+	}
+
+	public boolean isAvailable() {
+		return _available;
+	}
+
+	public void setAvailable(boolean available) {
+		this._available = available;
 	}
 }

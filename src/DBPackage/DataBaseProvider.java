@@ -1,17 +1,18 @@
-package DBPackage;
+package dbPackage;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
 
 public class DataBaseProvider{
 	
-	public static Connection conn = null;
-	
+	private static Connection Connect = null;
+	public static Statement Statement;
 	private static DataBaseProvider _instance = null;
 	
 	private String uri = null;
@@ -21,6 +22,10 @@ public class DataBaseProvider{
 	//constructor
 	private DataBaseProvider(){
 		InitConnection();
+	}
+	
+	public static Statement GetNewStatement() throws SQLException	{
+		return Connect.createStatement();
 	}
 	
 	private void InitConnection()	{
@@ -36,11 +41,11 @@ public class DataBaseProvider{
 	           System.exit (-1) ;
 	        }
             
-			String url = "jdbc:mysql://localhost/";
-			conn = DriverManager.getConnection(url,"alexoander","12345D");
+			//String url = "jdbc:mysql://localhost/";
+			Connect = DriverManager.getConnection(uri,login,pass);
 			// create a statement
-			Statement statement = conn.createStatement();
-			boolean res = statement.execute("Select * from fmdat.customer");
+			Statement = Connect.createStatement();
+			boolean res = Statement.execute("Select * from fmdat.customer");
 			if (res)
 				System.out.println("Connected to fmdat");
 			else
@@ -49,7 +54,7 @@ public class DataBaseProvider{
 		catch(java.sql.SQLException e)
 		{
 			e.printStackTrace();
-			System.out.println("Connect to MySql failed!");
+			System.out.println("********\nConnect to MySql failed!\n**********");
 			System.exit (-1) ;
 		}
 	}
@@ -87,7 +92,7 @@ public class DataBaseProvider{
     protected void finalize() throws Throwable 
     {
         //close connection when exit application
-		conn.close();
+		Connect.close();
         super.finalize();
     }
 }
