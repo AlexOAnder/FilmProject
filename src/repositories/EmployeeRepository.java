@@ -6,12 +6,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entities.Customer;
 import Entities.Employee;
 import Entities.Employee;
 import dbPackage.DataBaseProvider;
+import interfaces.IEmployeeRepository;
 import interfaces.IRepository;
 
-public class EmployeeRepository {
+public class EmployeeRepository implements IEmployeeRepository{
 	
 	public EmployeeRepository() {
 	}

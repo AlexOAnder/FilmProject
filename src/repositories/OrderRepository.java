@@ -1,6 +1,7 @@
 package repositories;
 
 import dbPackage.DataBaseProvider;
+import interfaces.IOrderRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import java.util.List;
 import Entities.Order;
 
 
-public class OrderRepository {
+public class OrderRepository implements IOrderRepository{
 	
 	public OrderRepository() {
 	}
@@ -80,14 +81,7 @@ public class OrderRepository {
 		
 		return result.get(0);
 	}
-	
-	public List<Order> GetByName(String name) throws Exception{
-		
-		String sql = "SELECT * FROM fmdat.Order Where Name like /%"+name+"/% ;";
-		List<Order> result = GetResultSetList(sql);
-		return result;
-	}
-		
+			
 	private void ExecuteWithNoResult(String sql) throws Exception{
 		try {
 			Statement s = DataBaseProvider.GetNewStatement();
@@ -101,9 +95,10 @@ public class OrderRepository {
 
 	private List<Order> GetResultSetList(String sql) throws Exception
 	{
+		Statement s = DataBaseProvider.GetNewStatement();
 		List<Order> ordersList = new ArrayList<Order >();
 		try {
-			Statement s = DataBaseProvider.GetNewStatement();
+			
 			ResultSet rs = s.executeQuery(sql);
 			while (rs.next()){
 				Order tmp = new Order(rs);

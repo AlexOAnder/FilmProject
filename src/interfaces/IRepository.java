@@ -4,11 +4,9 @@ import java.util.List;
 
 public interface IRepository<TEntity> 
 {
-    public TEntity Get(int id);
-    
-    public List<TEntity> GetAll();
-    
-    public boolean Insert(TEntity newEntity);
-    
-    public void Delete(int id);
+	void Create (TEntity model);
+	void Update (TEntity model);
+	void Delete (TEntity model);
+    public List<TEntity> GetAll() throws Exception;
+
 }

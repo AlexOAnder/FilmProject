@@ -9,8 +9,9 @@ import java.util.List;
 import Entities.Film;
 import Entities.FilmType;
 import dbPackage.DataBaseProvider;
+import interfaces.IFilmRepository;
 
-public class FilmRepository {
+public class FilmRepository implements IFilmRepository{
 
 	public FilmRepository() {
 	}

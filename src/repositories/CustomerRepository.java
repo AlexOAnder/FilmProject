@@ -9,6 +9,8 @@ import java.util.List;
 import Entities.Customer;
 import Entities.Customer;
 import dbPackage.DataBaseProvider;
+import interfaces.ICustomerRepository;
+import interfaces.IRepository;
 
 public class CustomerRepository implements ICustomerRepository{
 
@@ -32,7 +34,7 @@ public class CustomerRepository implements ICustomerRepository{
 	     }
 	}
 
-	public void Update (Customer model){
+	public void Update(Customer model){
 		String sql = "UPDATE fmdat.Customer SET "
 			                + "FirstName = '" + model.getFirstName()+ "'" +","
 			                + "LastName = '" + model.getLastName()+ "'" +","
@@ -113,7 +115,5 @@ public class CustomerRepository implements ICustomerRepository{
 			e.printStackTrace();
 		}
 		return customersList;	
-	}
-	
-	
+	}	
 }

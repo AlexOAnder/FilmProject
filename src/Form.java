@@ -6,18 +6,14 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import dbPackage.DataBaseProvider;
 import repositories.CustomerRepository;
-import repositories.ICustomerRepository;
 
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
-
-import Entities.Customer;
 
 import javax.swing.JScrollPane;
 
@@ -27,41 +23,24 @@ public class Form {
 	private JPanel panel_1;
 	private JButton btnSend;
 
-	private static ICustomerRepository _customerRepository;
 	JTextArea consoleTextArea;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		InitRepositories();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Form window = new Form();
 					window.frmServerside.setVisible(true);
 					DataBaseProvider.GetInstance();
-					List<Customer> list = _customerRepository.GetAll();
-					for (Customer customer : list) {
-						System.out.println(customer.toString());
-					}
-					Customer cust1 = _customerRepository.GetById(0);
-					if (cust1 != null)
-						System.out.println(cust1.toString());
-					else {
-						System.out.println("Empty");
-					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-
-	private static void InitRepositories() {
-		_customerRepository = new CustomerRepository();
-	}
-
 	/**
 	 * Create the application.
 	 */
