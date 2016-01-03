@@ -8,9 +8,15 @@ import dbPackage.DataBaseProvider;
 import repositories.CustomerRepository;
 
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
@@ -24,23 +30,38 @@ public class Form {
 	private JButton btnSend;
 
 	JTextArea consoleTextArea;
+	private ArrayList clientOutputStreams;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					Form window = new Form();
 					window.frmServerside.setVisible(true);
 					DataBaseProvider.GetInstance();
+					ConnectService cs = new ConnectService();
+					SimpleServerSocket sc = new SimpleServerSocket();
+					Thread t1 = new Thread (sc);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				
+				
+			}
+		});
 	}
+	
+	
 	/**
 	 * Create the application.
 	 */
