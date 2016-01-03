@@ -29,15 +29,14 @@ public class Film {
 		
 		setRentCost(rs.getDouble("RentCost"));
 		setAvailableCount(rs.getInt("AvailableCount"));
-		setAvailable(rs.getBoolean("Available"));
+		setAvailable();
 	}
 
 	public int getFilmId() {
 		return _filmId;
 	}
 
-	public void setFilmId(int filmId) {
-		// need to investigate - i think that setter is redundant
+	private void setFilmId(int filmId) {
 		_filmId = filmId;
 	}
 
@@ -100,7 +99,7 @@ public class Film {
 		return _available;
 	}
 
-	public void setAvailable(boolean available) {
-		this._available = available;
+	public void setAvailable() {
+		this._available = _availableCount>0;
 	}
 }
