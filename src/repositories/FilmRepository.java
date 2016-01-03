@@ -49,7 +49,7 @@ public class FilmRepository {
 	}
 	
 	public void Delete (Film model){
-		String sql = "DELETE fmdat.Film WHERE CustomerId = "+ model.getFilmId() ;
+		String sql = "DELETE fmdat.Film WHERE FilmId = "+ model.getFilmId() ;
 		try {
 			ExecuteWithNoResult(sql);
 		} catch (Exception e) {

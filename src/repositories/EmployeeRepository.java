@@ -50,7 +50,7 @@ public class EmployeeRepository {
 	}
 	
 	public void Delete (Employee model){
-		String sql = "DELETE fmdat.Employee WHERE CustomerId = "+ model.getEmployeeId() ;
+		String sql = "DELETE fmdat.Employee WHERE EmployeeId = "+ model.getEmployeeId() ;
 		try {
 			ExecuteWithNoResult(sql);
 		} catch (Exception e) {
@@ -78,7 +78,7 @@ public class EmployeeRepository {
 	
 	public Employee GetByIdAndPass(int id,String pass) throws Exception{
 		
-		String sql = "SELECT * FROM fmdat.Employee Where EmployeeId = "+ id +"CashierPassword = "+pass+" ;";
+		String sql = "SELECT * FROM fmdat.Employee Where EmployeeId = "+ id +"AND CashierPassword = "+pass+" ;";
 		List<Employee> result = GetResultSetList(sql);
 		if (result.size()>1){
 			throw new Exception("Wrong number of customers! More than 1 - > Owibka v logike bd");
