@@ -14,8 +14,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
@@ -30,13 +34,10 @@ public class Form {
 	private JButton btnSend;
 
 	JTextArea consoleTextArea;
-	private ArrayList clientOutputStreams;
-
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -44,19 +45,24 @@ public class Form {
 					Form window = new Form();
 					window.frmServerside.setVisible(true);
 					DataBaseProvider.GetInstance();
-					ConnectService cs = new ConnectService();
-					SimpleServerSocket sc = new SimpleServerSocket();
-					Thread t1 = new Thread (sc);
+					//new Thread (new SimpleServerSocket());
+					
+					System.setProperty("java.rmi.server.hostname","127.0.0.1");
+					LocateRegistry.createRegistry(1099);
+					IConnectService serv = new ConnectService();
+					
+					Naming.rebind("Hi", serv);
+					String[] ss = Naming.list("127.0.0.1");
+					// debug
+					for (String item : ss)
+					{
+						System.out.println(item);
+					}
+					if (ss.length>0)
+						System.out.println("RMI Connected");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
-		});
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				
-				
 			}
 		});
 	}
@@ -89,7 +95,7 @@ public class Form {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (arg0.getSource() == btnSend)
-					// JOptionPane.showMessageDialog(null, "Hello");
+					//JOptionPane.showMessageDialog(null, "Hello");
 					System.out.println("fsdfsa");
 			}
 		});

@@ -1,16 +1,14 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class SimpleServerSocket implements Runnable{
+public class SimpleServerSocket implements Runnable {
 	ArrayList clientOutputStreams;
-
-	public static void main(String[] args) {
-		
-	}
+	ServerSocket serverSock;
 
 	public class ClientHandler implements Runnable {
 		BufferedReader reader;
@@ -44,21 +42,11 @@ public class SimpleServerSocket implements Runnable{
 		}
 	}
 
-	public void initSocket() {
+	public SimpleServerSocket() {
 		System.out.println("Initialize socket listening (5001)");
 		clientOutputStreams = new ArrayList();
 		try {
-			ServerSocket serverSock = new ServerSocket(5002);
-
-			while (true) {
-				Socket clientSocket = serverSock.accept();
-				PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
-				clientOutputStreams.add(writer);
-
-				Thread t = new Thread(new ClientHandler(clientSocket));
-				t.start();
-				System.out.println("We go a connect");
-			}
+			serverSock = new ServerSocket(5002);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -66,6 +54,21 @@ public class SimpleServerSocket implements Runnable{
 
 	@Override
 	public void run() {
-		new SimpleServerSocket().initSocket();
+
+		try {
+			while (true) {
+				Socket clientSocket;
+				clientSocket = serverSock.accept();
+				PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
+				clientOutputStreams.add(writer);
+
+				Thread t = new Thread(new ClientHandler(clientSocket));
+				t.start();
+				System.out.println("We go a connect");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
