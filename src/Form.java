@@ -51,7 +51,7 @@ public class Form {
 					LocateRegistry.createRegistry(1099);
 					IConnectService serv = new ConnectService();
 					
-					Naming.rebind("Hi", serv);
+					Naming.rebind("ConnectService", serv);
 					String[] ss = Naming.list("127.0.0.1");
 					// debug
 					for (String item : ss)
