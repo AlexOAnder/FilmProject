@@ -1,9 +1,11 @@
 package Entities;
 
+import java.io.Serializable;
+
 /**Created by AlexOAnder 
  * 02.01.2016**/
 
-public enum FilmType {
+public enum FilmType implements Serializable{
 	None (0),
 	Comedy (1),
 	Action (2),

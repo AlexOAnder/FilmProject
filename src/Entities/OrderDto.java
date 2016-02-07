@@ -1,12 +1,13 @@
 package Entities;
 
+import java.io.Serializable;
 import java.util.Date;
 // need for representation of the Order's object
 
 /**Created by AlexOAnder 
  * 02.01.2016**/
 
-public class OrderDto {
+public class OrderDto implements Serializable{
 
 	private int _orderId;
 	private Customer _customer;

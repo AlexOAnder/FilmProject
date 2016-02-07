@@ -1,13 +1,14 @@
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import Entities.Order;
 
 public interface IConnectService extends Remote{
 
-	public void GetOrders() throws RemoteException;
+	public List<Order> GetOrders() throws RemoteException;
 			
-	public void GetFilmsList()	throws RemoteException;
+	public String[] GetFilmsList()	throws RemoteException;
 	
 	public void AddNewOrder(Order order) throws RemoteException;
 	

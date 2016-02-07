@@ -1,5 +1,6 @@
 package Entities;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -7,7 +8,7 @@ import java.sql.SQLException;
 /**Created by AlexOAnder 
  * 02.01.2016**/
 
-public class Film {
+public class Film implements Serializable{
 
 	private int _filmId;
 	private String _name;

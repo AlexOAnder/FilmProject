@@ -1,5 +1,6 @@
 package Entities;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.Date;
 /**Created by AlexOAnder 
  * 02.01.2016**/
 
-public class Employee extends User {
+public class Employee extends User implements Serializable{
 
 	private int _employeeId;
 	private String _cashierPassword;

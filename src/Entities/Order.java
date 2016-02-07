@@ -1,4 +1,5 @@
 package Entities;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -7,7 +8,7 @@ import java.util.Date;
  * 02.01.2016**/
 
 // need for the SQL table
-public class Order {
+public class Order implements Serializable{
 	private int _orderId;
 	private int _filmId;
 	private int _customerId;
@@ -29,6 +30,10 @@ public class Order {
 		_rentExpires = rs.getDate("RentExpires");
 		_returned = rs.getBoolean("Returned");
 		_totalAmount = rs.getFloat("TotalAmount");
+	}
+
+	public Order() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getOrderId() {

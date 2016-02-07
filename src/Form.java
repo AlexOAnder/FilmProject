@@ -52,13 +52,12 @@ public class Form {
 					IConnectService serv = new ConnectService();
 					
 					Naming.rebind("ConnectService", serv);
-					String[] ss = Naming.list("127.0.0.1");
+					String[] serversList = Naming.list("127.0.0.1");
 					// debug
-					for (String item : ss)
-					{
+					for (String item : serversList)	{
 						System.out.println(item);
 					}
-					if (ss.length>0)
+					if (serversList.length>0) // if we have registered out server - tell about that
 						System.out.println("RMI Connected");
 				} catch (Exception e) {
 					e.printStackTrace();

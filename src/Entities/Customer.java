@@ -1,12 +1,13 @@
 package Entities;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**Created by AlexOAnder 
  * 02.01.2016**/
 
-public class Customer extends User{
+public class Customer extends User implements Serializable{
 
 	private int _customerId;
 	private String _passportNumber;

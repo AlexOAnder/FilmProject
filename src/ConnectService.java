@@ -1,5 +1,7 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
 
 import Entities.Order;
 import interfaces.*;
@@ -22,12 +24,21 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 	}
 
 	
-	public void GetOrders()	{
+	public List<Order> GetOrders()	{
+		List<Order> orderList = new ArrayList<Order>();
+
+		Order o1 = new Order();
+		o1.setFilmId(1);
+		o1.setOrderId(2);
+		o1.setReturned(false);
+		orderList.add(o1);
 		
+		return orderList;
 	}
 	
-	public void GetFilmsList()	{
-		
+	public String[] GetFilmsList()	{
+		String[] ss = {"a","b","c"};
+		return ss;
 	}
 	
 	public void AddNewOrder(Order order)	{
