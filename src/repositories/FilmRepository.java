@@ -59,7 +59,7 @@ public class FilmRepository implements IFilmRepository{
 	}
 	
 	public List<Film> GetAll() throws Exception{
-		String sql = "SELECT * FROM fmdat.Film;";
+		String sql = "SELECT * FROM fmdat.Films;";
 		return GetResultSetList(sql);
 	}
 	

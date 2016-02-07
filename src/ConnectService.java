@@ -3,6 +3,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entities.Film;
 import Entities.Order;
 import interfaces.*;
 import repositories.*;
@@ -23,7 +24,6 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 		this._employeeRepository = new EmployeeRepository();
 	}
 
-	
 	public List<Order> GetOrders()	{
 		List<Order> orderList = new ArrayList<Order>();
 
@@ -36,9 +36,13 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 		return orderList;
 	}
 	
-	public String[] GetFilmsList()	{
-		String[] ss = {"a","b","c"};
-		return ss;
+	public List<Film> GetFilmsList()	{
+		try {
+			return _filmRepository.GetAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public void AddNewOrder(Order order)	{
@@ -47,5 +51,9 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 	
 	public void UpdateOrderStatusById(int id,int status){
 		
+	}
+
+	public boolean GetStatusConnect() throws RemoteException {
+		return true;
 	}
 }
