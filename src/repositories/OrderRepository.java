@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entities.CustomOrderView;
 import Entities.Order;
 
 
@@ -17,9 +18,47 @@ public class OrderRepository implements IOrderRepository{
 	public OrderRepository() {
 	}
 	
+	public List<CustomOrderView> GetCustomOrderView()
+	{
+		String sql = "SELECT o.OrderId, "
+				+ "cus.CustomerId, "
+				+ "cus.FirstName, "
+				+ "cus.LastName, "
+				+ "cus.PassportNumber, "
+				+ "film.FilmId, "
+				+ "film.Name as FilmName, "
+				+ "o.Created, "
+				+ "o.RentExpires, "
+				+ "o.Returned, "
+				+ "cus.PhoneNumber, "
+				+ "(datediff(o.RentExpires,o.Created) * film.RentCost) as TotalAmount "
+				+ "from fmdat.order as o "
+				+ "left join fmdat.customer as cus ON o.CustomerId = cus.CustomerId "
+				+ "left join fmdat.films as film on o.FilmId = film.FilmId";
+				try {
+			Statement s = DataBaseProvider.GetNewStatement();
+			List<CustomOrderView> list = new ArrayList<CustomOrderView>();
+			ResultSet rs = s.executeQuery(sql);
+			while (rs.next()){
+				CustomOrderView tmp = new CustomOrderView(rs);
+				list.add(tmp);
+			}
+			if (list.isEmpty())	{
+				return null;
+			}
+			s.close();
+			return list;
+
+	     } catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
 	public void Create(Order model){
 	     String sql = "INSERT INTO fmdat.Order "+
-	     "(OrderId,CustomerId,FilmId,EmployeeId,Created,RentExpired,RentStartDate,TotalAmount,Returned)"
+	     "(OrderId,CustomerId,FilmId,EmployeeId,Created,RentExpires,RentStartDate,TotalAmount,Returned,PhoneNumber)"
 	    		 +" VALUES ("
 	                + "'" + model.getOrderId() + "'" +","
 	                + "'" + model.getCustomerId() + "'" +","
@@ -27,9 +66,8 @@ public class OrderRepository implements IOrderRepository{
 	                + "'" + model.getEmployeeId()+ "'" +","
 	                + "'" + model.getCreated()+ "'" +","
 	                + "'" + model.getRentExpires()+ "'" +","
-	                + "'" + model.getRentStartDate()+ "'" +","
-	                + "'" + model.getTotalAmount()+ "'" +","
-	                + "'" + model.isReturned()+ "'" + ")";
+	                + "'" + model.isReturned()+ "'" +","
+	                + "'" + model.get_phoneNumber()+ "'" + ")";
 	     try {
 			ExecuteWithNoResult(sql);
 	     } catch (Exception e) {
@@ -43,10 +81,9 @@ public class OrderRepository implements IOrderRepository{
 			                + "FilmId = '" + model.getFilmId()+ "'" +","
 			                + "EmployeeId = '" + model.getEmployeeId()+ "'" +","
 			                + "Created = '" + model.getCreated()+ "'" + ")"
-			                + "RentStartDate = '" + model.getRentStartDate()+ "'" + ")"
-			                + "RentExpired = '" + model.getRentExpires()+ "'" + ")"
-			                + "TotalAmount = '" + model.getTotalAmount()+ "'" + ")"
+			                + "RentExpires = '" + model.getRentExpires()+ "'" + ")"
 			                + "Returned = '" + model.isReturned()+ "'" + ")"
+			                + "PhoneNumber = '" + model.get_phoneNumber()+ "'"+")"
 			                + " WHERE OrderId = "+ model.getOrderId() ;
 	     try {
 			ExecuteWithNoResult(sql);
