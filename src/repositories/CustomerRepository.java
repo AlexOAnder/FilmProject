@@ -80,8 +80,9 @@ public class CustomerRepository implements ICustomerRepository{
 	
 	public Customer GetByPassportNumber(String passNum) throws Exception{
 		
-		String sql = "SELECT * FROM fmdat.Customer Where PassportNumber = "+passNum+" ;";
+		String sql = "SELECT * FROM fmdat.Customer Where PassportNumber = '"+passNum+"' ;";
 		List<Customer> result =  GetResultsList(sql);
+		if (result == null) return null;
 		if (result.size()>1){
 			throw new Exception("Wrong number of customers! More than 1 - > Owibka v logike bd");
 		}

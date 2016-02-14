@@ -58,27 +58,25 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 
 	}
 
-	public void AddNewCustomOrderView(CustomOrderView order) {
+	public void AddNewCustomOrderView(CustomOrderView order) throws RemoteException {
 		Customer currentCustomer = null;
 		try {
 			System.out.println("Start Create order method");
-			// create new Customer
-			if (order.CustomerId == 0) {
+			
+			currentCustomer = _customerRepository.GetByPassportNumber(order.PassportNumber);
+			if (currentCustomer == null) {
+				// create new Customer
 				Customer cus = new Customer();
 				cus.setFirstName(order.CustomerFirstName);
 				cus.setLastName(order.CustomerLastName);
 				cus.setPassportNumber(order.PassportNumber);
 				cus.setPhoneNumber(order.PhoneNumber);
 				_customerRepository.Create(cus);
-			} else {
-				// get Customer with knowable id;
-				currentCustomer = _customerRepository.GetById(order.CustomerId);
-			}
-			// get new Customer with Id
-			// create new order with new Customer's Id
-			currentCustomer = _customerRepository.GetByPassportNumber(order.PassportNumber);
+				currentCustomer = _customerRepository.GetByPassportNumber(order.PassportNumber);
+			} 
+			// get Customer with PassportNumber
 			if (currentCustomer == null) {
-				System.out.println("Add customer didn't add any data!");
+				System.out.println("Add customer's function didn't add any data!");
 			} else {
 				Order newOrder = new Order();
 				newOrder.setCustomerId(currentCustomer.getCustomerId());
@@ -95,6 +93,7 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new RemoteException("Sql add new order failed");
 		}
 
 	}
