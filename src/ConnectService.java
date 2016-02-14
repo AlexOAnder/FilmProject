@@ -6,6 +6,7 @@ import java.util.List;
 
 import Entities.CustomOrderView;
 import Entities.Customer;
+import Entities.Employee;
 import Entities.Film;
 import Entities.Order;
 import interfaces.*;
@@ -106,5 +107,23 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 	public boolean GetStatusConnect() throws RemoteException {
 		System.out.println("Check Status of the RMI Connect");
 		return true;
+	}
+
+	public boolean IdentificationAccess(String login, String pass) throws RemoteException {
+		System.out.println("Try to authorize");
+		Employee empl;
+		try {
+			empl = _employeeRepository.GetByLoginAndPass(login,pass);
+			if (empl == null) // not found user because have wrong login or password
+			{
+				System.out.println("login failed! Tried to gain access : "+login );
+				return false;
+			}
+			System.out.println("Success login : "+empl.getFirstName()+ " "+empl.getLastName()+" !" );
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RemoteException("Sql Authorize failed");
+		}
 	}
 }

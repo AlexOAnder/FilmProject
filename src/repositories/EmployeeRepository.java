@@ -21,12 +21,13 @@ public class EmployeeRepository implements IEmployeeRepository{
 	public void Create(Employee model){
         
 	     String sql = "INSERT INTO fmdat.Employee "+
-	     "(EmployeeId,FirstName,LastName,CashierPassword,Hired,ContracExpires)"
+	     "(EmployeeId,FirstName,LastName,CashierPassword,Login,Hired,ContracExpires)"
 	    		 +" VALUES ("
 	                + "'" + model.getEmployeeId() + "'" +","
 	                + "'" + model.getFirstName() + "'" +","
 	                + "'" + model.getLastName() + "'" +","
 	                + "'" + model.getCashierPassword()+ "'" +","
+	                + "'" + model.getLogin()+ "'" +","
 	                + "'" + model.getHired()+ "'" +","
 	                + "'" + model.getContractExpires()+ "'" + ")";
 	     try {
@@ -41,6 +42,7 @@ public class EmployeeRepository implements IEmployeeRepository{
 			                + "FirstName = '" + model.getFirstName()+ "'" +","
 			                + "LastName = '" + model.getLastName()+ "'" +","
 			                + "CashierPassword = '" + model.getCashierPassword()+ "'" +","
+			                + "Login = '" + model.getLogin()+ "'" +","
 			                + "Hired = '" + model.getHired()+ "'" + ")"
 			                + "ContracExpires = '" + model.getContractExpires()+ "'" 
 			                + "WHERE EmployeeId = "+ model.getEmployeeId() ;
@@ -75,6 +77,18 @@ public class EmployeeRepository implements IEmployeeRepository{
 			throw new Exception("Wrong number of customers! More than 1 - > Owibka v logike bd");
 		}
 		
+		return result.get(0);
+	}
+	
+	public Employee GetByLoginAndPass(String login,String pass) throws Exception{
+		String sql = "SELECT * FROM fmdat.Employee Where Login = '"+login+"' AND CashierPassword = '"+pass+"';";
+		List<Employee> result = GetResultSetList(sql);
+		if (result == null){
+			return null;
+		}
+		if (result.size()>1){
+			throw new Exception("Wrong number of customers! More than 1 - > Error in logic");
+		}
 		return result.get(0);
 	}
 	

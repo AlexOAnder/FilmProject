@@ -14,11 +14,13 @@ public class Employee extends User implements Serializable{
 	private String _cashierPassword;
 	private Date _hired;
 	private Date _contractExpires;
+	private String _login;
 
 	public Employee(ResultSet rs) throws SQLException {
-		setEmployeeId(rs.getInt("CustomerId"));
+		setEmployeeId(rs.getInt("EmployeeId"));
 		setFirstName(rs.getString("FirstName"));
 		setLastName(rs.getString("LastName"));
+		setLogin(rs.getString("Login"));
 		setCashierPassword(rs.getString("CashierPassword"));
 		setHired(rs.getDate("Hired"));
 		setContractExpires(rs.getDate("ContractExpires"));
@@ -56,5 +58,13 @@ public class Employee extends User implements Serializable{
 		if (_hired != null)
 			if (contractExpires.after(_hired))
 				_contractExpires = contractExpires;
+	}
+
+	public String getLogin() {
+		return _login;
+	}
+
+	public void setLogin(String _login) {
+		this._login = _login;
 	}
 }
