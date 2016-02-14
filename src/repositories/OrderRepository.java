@@ -82,9 +82,9 @@ public class OrderRepository implements IOrderRepository{
 			                + "CustomerId = '" + model.getCustomerId()+ "'" +","
 			                + "FilmId = '" + model.getFilmId()+ "'" +","
 			                //+ "EmployeeId = '" + model.getEmployeeId()+ "'" +","
-			                + "Created = '" + model.getCreated()+ "'" + ")"
-			                + "RentExpires = '" + model.getRentExpires()+ "'" + ")"
-			                + "Returned = '" + model.isReturned()+ "'" + ")"
+			                + "Created = '" + model.getCreated()+ "'" 
+			                + "RentExpires = '" + model.getRentExpires()+ "'" 
+			                + "Returned = '" + model.isReturned()+ "'" 
 			                + " WHERE OrderId = "+ model.getOrderId() ;
 	     try {
 			ExecuteWithNoResult(sql);
@@ -92,6 +92,7 @@ public class OrderRepository implements IOrderRepository{
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public void Delete (Order model){
 		String sql = "DELETE fmdat.Order WHERE OrderId = "+ model.getOrderId() ;
@@ -150,6 +151,19 @@ public class OrderRepository implements IOrderRepository{
 			e.printStackTrace();
 		}
 		return ordersList;	
+	}
+
+	public void UpdateReturnedStatusById(int orderId, int status) {
+		String sql = "UPDATE fmdat.Order SET "
+                + "Returned = '" + status+ "'"
+                + " WHERE OrderId = "+ orderId ;
+		try {
+			System.out.println("SQL-Update Order's 'Returned' Status");
+			ExecuteWithNoResult(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

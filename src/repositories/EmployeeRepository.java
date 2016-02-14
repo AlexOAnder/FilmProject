@@ -42,7 +42,7 @@ public class EmployeeRepository implements IEmployeeRepository{
 			                + "LastName = '" + model.getLastName()+ "'" +","
 			                + "CashierPassword = '" + model.getCashierPassword()+ "'" +","
 			                + "Hired = '" + model.getHired()+ "'" + ")"
-			                + "ContracExpires = '" + model.getContractExpires()+ "'" + ")"
+			                + "ContracExpires = '" + model.getContractExpires()+ "'" 
 			                + "WHERE EmployeeId = "+ model.getEmployeeId() ;
 	     try {
 			ExecuteWithNoResult(sql);

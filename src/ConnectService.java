@@ -99,6 +99,11 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 
 	}
 
+	public void UpdateOrderStatus(int orderId)
+	{
+		_orderRepository.UpdateReturnedStatusById(orderId,1);
+	}
+	
 	public boolean GetStatusConnect() throws RemoteException {
 		System.out.println("Check Status of the RMI Connect");
 		return true;
