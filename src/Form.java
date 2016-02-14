@@ -86,7 +86,7 @@ public class Form {
 		frmServerside.getContentPane().setLayout(null);
 
 		panel_1 = new JPanel();
-		panel_1.setBounds(10, 11, 124, 138);
+		panel_1.setBounds(10, 11, 59, 138);
 		frmServerside.getContentPane().add(panel_1);
 
 		btnSend = new JButton("Send");
@@ -101,12 +101,12 @@ public class Form {
 		panel_1.add(btnSend);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(174, 11, 445, 387);
+		panel.setBounds(96, 11, 547, 387);
 		frmServerside.getContentPane().add(panel);
 		panel.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 425, 365);
+		scrollPane.setBounds(10, 11, 527, 365);
 		panel.add(scrollPane);
 
 		consoleTextArea = new JTextArea();

@@ -57,17 +57,19 @@ public class OrderRepository implements IOrderRepository{
 	}
 	
 	public void Create(Order model){
+		java.sql.Date data1 = new java.sql.Date(model.getCreated().getTime());
+		java.sql.Date data2 = new java.sql.Date(model.getRentExpires().getTime());
 	     String sql = "INSERT INTO fmdat.Order "+
-	     "(OrderId,CustomerId,FilmId,EmployeeId,Created,RentExpires,RentStartDate,TotalAmount,Returned,PhoneNumber)"
+	     "(OrderId,CustomerId,FilmId,Created,RentExpires,Returned)"
 	    		 +" VALUES ("
 	                + "'" + model.getOrderId() + "'" +","
 	                + "'" + model.getCustomerId() + "'" +","
 	                + "'" + model.getFilmId() + "'" +","
-	                + "'" + model.getEmployeeId()+ "'" +","
-	                + "'" + model.getCreated()+ "'" +","
-	                + "'" + model.getRentExpires()+ "'" +","
-	                + "'" + model.isReturned()+ "'" +","
-	                + "'" + model.get_phoneNumber()+ "'" + ")";
+	               // + "'" + model.getEmployeeId()+ "'" +","
+	                + "'" + data1+ "'" +","
+	                + "'" + data2+ "'" +","
+	                + "'" + (model.isReturned()?1:0)+ "'" +")";
+	     System.out.println("SQL - CreateOrder");
 	     try {
 			ExecuteWithNoResult(sql);
 	     } catch (Exception e) {
@@ -79,11 +81,10 @@ public class OrderRepository implements IOrderRepository{
 		String sql = "UPDATE fmdat.Order SET "
 			                + "CustomerId = '" + model.getCustomerId()+ "'" +","
 			                + "FilmId = '" + model.getFilmId()+ "'" +","
-			                + "EmployeeId = '" + model.getEmployeeId()+ "'" +","
+			                //+ "EmployeeId = '" + model.getEmployeeId()+ "'" +","
 			                + "Created = '" + model.getCreated()+ "'" + ")"
 			                + "RentExpires = '" + model.getRentExpires()+ "'" + ")"
 			                + "Returned = '" + model.isReturned()+ "'" + ")"
-			                + "PhoneNumber = '" + model.get_phoneNumber()+ "'"+")"
 			                + " WHERE OrderId = "+ model.getOrderId() ;
 	     try {
 			ExecuteWithNoResult(sql);

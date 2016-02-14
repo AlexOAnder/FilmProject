@@ -1,9 +1,11 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import Entities.CustomOrderView;
+import Entities.Customer;
 import Entities.Film;
 import Entities.Order;
 import interfaces.*;
@@ -28,7 +30,6 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 
 	public List<Order> GetOrders() {
 		List<Order> orderList = new ArrayList<Order>();
-
 		Order o1 = new Order();
 		o1.setFilmId(1);
 		o1.setOrderId(2);
@@ -47,7 +48,7 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 		return null;
 	}
 
-	public List<CustomOrderView> GetCustomOrderView() {
+	public List<CustomOrderView> GetCustomOrderViewList() {
 		try {
 			return _orderRepository.GetCustomOrderView();
 		} catch (Exception e) {
@@ -56,13 +57,50 @@ public class ConnectService extends UnicastRemoteObject implements IConnectServi
 		}
 
 	}
-	
-	public void AddNewCustomOrderView(CustomOrderView order)
-	{
+
+	public void AddNewCustomOrderView(CustomOrderView order) {
+		Customer currentCustomer = null;
+		try {
+			System.out.println("Start Create order method");
+			// create new Customer
+			if (order.CustomerId == 0) {
+				Customer cus = new Customer();
+				cus.setFirstName(order.CustomerFirstName);
+				cus.setLastName(order.CustomerLastName);
+				cus.setPassportNumber(order.PassportNumber);
+				cus.setPhoneNumber(order.PhoneNumber);
+				_customerRepository.Create(cus);
+			} else {
+				// get Customer with knowable id;
+				currentCustomer = _customerRepository.GetById(order.CustomerId);
+			}
+			// get new Customer with Id
+			// create new order with new Customer's Id
+			currentCustomer = _customerRepository.GetByPassportNumber(order.PassportNumber);
+			if (currentCustomer == null) {
+				System.out.println("Add customer didn't add any data!");
+			} else {
+				Order newOrder = new Order();
+				newOrder.setCustomerId(currentCustomer.getCustomerId());
+				newOrder.setCreated(order.Created);
+				newOrder.setEmployeeId(0);
+				newOrder.setFilmId(order.FilmId);
+				newOrder.setRentExpires(order.RentExpires);			
+				newOrder.setReturned(false);
+				newOrder.setCreated(new Date());
+				System.out.println("Add new order - with that customerId:" + currentCustomer.getCustomerId());
+				_orderRepository.Create(newOrder);
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
 	public boolean GetStatusConnect() throws RemoteException {
+		System.out.println("Check Status of the RMI Connect");
 		return true;
 	}
 }

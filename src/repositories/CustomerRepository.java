@@ -21,11 +21,12 @@ public class CustomerRepository implements ICustomerRepository{
 	public void Create(Customer model)	{
 	        
 	     String sql = "INSERT INTO fmdat.Customer "+
-	     "(CustomerId,FirstName,LastName,PassportNumber,Discount) VALUES ("
+	     "(CustomerId,FirstName,LastName,PassportNumber,PhoneNumber,Discount) VALUES ("
 	                + "'" + model.getCustomerId() + "'" +","
 	                + "'" + model.getFirstName() + "'" +","
 	                + "'" + model.getLastName() + "'" +","
 	                + "'" + model.getPassportNumber()+ "'" +","
+	                + "'" + model.getPhoneNumber()+ "'" +","
 	                + "'" + model.getDiscount()+ "'" + ")";
 	     try {
 			ExecuteWithNoResult(sql);
@@ -39,6 +40,7 @@ public class CustomerRepository implements ICustomerRepository{
 			                + "FirstName = '" + model.getFirstName()+ "'" +","
 			                + "LastName = '" + model.getLastName()+ "'" +","
 			                + "PassportNumber = '" + model.getPassportNumber()+ "'" +","
+			                + "PhoneNumber = '" + model.getPhoneNumber()+ "'" +","
 			                + "Discount = '" + model.getDiscount()+ "'" + ")"
 			                + "WHERE CustomerId = "+ model.getCustomerId() ;
 		try {
