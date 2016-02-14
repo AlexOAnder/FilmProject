@@ -30,8 +30,6 @@ import javax.swing.JScrollPane;
 public class Form {
 
 	private JFrame frmServerside;
-	private JPanel panel_1;
-	private JButton btnSend;
 
 	JTextArea consoleTextArea;
 	/**
@@ -81,27 +79,12 @@ public class Form {
 	private void initialize() {
 		frmServerside = new JFrame();
 		frmServerside.setTitle("ServerSide");
-		frmServerside.setBounds(100, 100, 669, 463);
+		frmServerside.setBounds(100, 100, 602, 463);
 		frmServerside.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmServerside.getContentPane().setLayout(null);
 
-		panel_1 = new JPanel();
-		panel_1.setBounds(10, 11, 59, 138);
-		frmServerside.getContentPane().add(panel_1);
-
-		btnSend = new JButton("Send");
-		btnSend.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (arg0.getSource() == btnSend)
-					//JOptionPane.showMessageDialog(null, "Hello");
-					System.out.println("fsdfsa");
-			}
-		});
-		panel_1.add(btnSend);
-
 		JPanel panel = new JPanel();
-		panel.setBounds(96, 11, 547, 387);
+		panel.setBounds(21, 11, 551, 387);
 		frmServerside.getContentPane().add(panel);
 		panel.setLayout(null);
 
