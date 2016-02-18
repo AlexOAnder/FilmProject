@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-
+// obsolete - old socket server
 public class SimpleServerSocket implements Runnable {
 	ArrayList clientOutputStreams;
 	ServerSocket serverSock;
